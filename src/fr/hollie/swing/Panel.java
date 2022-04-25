@@ -1,5 +1,7 @@
 package fr.hollie.swing;
 
+import fr.hollie.Methodes.RemoveAllItems;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -16,6 +18,7 @@ public class Panel {
     //Method for create a panel
     public static void Panal(JPanel panel, int LocX, int LocY, int SizeX, int SizeY, Color color, boolean Border, String Name){
         allPanels.add(panel);
+        RemoveAllItems.AllItems.add(panel);
         panel.setVisible(true);
         panel.setLocation(LocX,LocY);
         panel.setSize(SizeX, SizeY);

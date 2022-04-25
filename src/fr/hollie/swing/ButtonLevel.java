@@ -1,19 +1,47 @@
 package fr.hollie.swing;
 
+import fr.hollie.Methodes.CreateRect;
 import fr.hollie.Methodes.Guis.GuiHome;
+import fr.hollie.Methodes.Guis.GuiSettings;
 import fr.hollie.Methodes.RemoveAllItems;
 import fr.hollie.main.Main;
-import fr.hollie.swing.CreateRoundButton;
-import fr.hollie.swing.Label;
-import fr.hollie.swing.Panel;
+import fr.hollie.main.mainDraw;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class ButtonLevel {
 
+public class ButtonLevel extends JFrame implements KeyListener{
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode()== KeyEvent.VK_RIGHT)
+            draw.moveRight();
+        else if(e.getKeyCode()== KeyEvent.VK_LEFT)
+            draw.moveLeft();
+        else if(e.getKeyCode()== KeyEvent.VK_DOWN)
+            draw.moveDown();
+        else if(e.getKeyCode()== KeyEvent.VK_UP)
+            draw.moveUp();
+    }
+
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
+    private mainDraw draw;
+    public ButtonLevel(){
+        setResizable(false);
+        setLocation(Main.frame.getLocation());
+        setTitle(Main.frame.getTitle());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.draw=new mainDraw();
+        addKeyListener(this);
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
+        pack();
+        setVisible(true);
+    }
 
     //Method for create a button in a FRAME
     public static void Button(JFrame frame, int LocX, int LocY, int SizeX, int SizeY, Color Border, Color Back, String Name,
@@ -35,12 +63,18 @@ public class ButtonLevel {
         }
         //Actions related to buttons
         button.addActionListener((event) -> {
-            if(button.getText().equalsIgnoreCase("Return")){
-                Panel.ColseAllPanels();
-                RemoveAllItems.RemoveAllItems();
-                GuiHome.GuiHome();
-            }
-        });
+                    if (button.getText().equalsIgnoreCase("Return")) {
+                        Panel.ColseAllPanels();
+                        RemoveAllItems.RemoveAllItems();
+                        GuiHome.GuiHome();
+                    } else if (button.getText().equalsIgnoreCase("(1)")) {
+                        ButtonLevel f = new ButtonLevel();
+                        f.setSize(Main.frame.getWidth(), Main.frame.getHeight());
+                        f.getContentPane().add(f.draw);
+                        frame.setVisible(false);
+
+                    }
+                });
         frame.add(button);
 
     }
