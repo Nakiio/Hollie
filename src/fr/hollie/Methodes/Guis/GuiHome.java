@@ -28,7 +28,7 @@ public class GuiHome {
                 false, false, null,false, Color.GRAY);
         Label.Label(panel,null, 350, 100,450,200, 100, "Hollie",
                 false, false, null,false, Color.GRAY);
-        Panel.Panal(panel,0,0,1000,600, Color.DARK_GRAY,true,"Menu");
+        Panel.Panal(panel,0,0,1000,600, Color.DARK_GRAY,true,"Gui");
 
     }
 }

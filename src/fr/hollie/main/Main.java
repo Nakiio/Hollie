@@ -13,14 +13,8 @@ public class Main extends JFrame{
     public static int LevelPLayer = 1;
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                //Level5 level2 = new Level5(2080,0,1048,640);
-                GuiHome.GuiHome();
-                Frame.Frame(frame,0,0,1048,640,"Menu", true, false, null);
-
-            }
-        });
+        GuiHome.GuiHome();
+        Frame.Frame(frame,0,0,1048,640,"Gui", true, false, null);
     }
 }
 
