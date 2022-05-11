@@ -149,7 +149,7 @@ public class Level5 extends JPanel implements ActionListener, KeyListener, Mouse
     public void mouseClicked(MouseEvent e) {
         if(LevelGui.contains(e.getPoint())){
             f.setVisible(false);
-            GuiLevel.GuiLevel();
+            GuiLevel.GuiLevel(" ");
         }else if(Restart.contains(e.getPoint())){
             Level5 level2 = new Level5(f.getX(), f.getY(), (int) f.getSize().getWidth(), (int) f.getSize().getHeight());
             repaint();

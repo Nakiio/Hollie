@@ -143,7 +143,7 @@ public class Level3 extends JPanel implements ActionListener, KeyListener, Mouse
     public void mouseClicked(MouseEvent e) {
         if(LevelGui.contains(e.getPoint())){
             f.setVisible(false);
-            GuiLevel.GuiLevel();
+            GuiLevel.GuiLevel(" ");
         }else if(Restart.contains(e.getPoint())){
             Level3 level2 = new Level3(f.getX(), f.getY(), (int) f.getSize().getWidth(), (int) f.getSize().getHeight());
             repaint();

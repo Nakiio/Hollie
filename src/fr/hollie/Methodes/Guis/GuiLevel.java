@@ -2,9 +2,11 @@ package fr.hollie.Methodes.Guis;
 
 import fr.hollie.main.Main;
 import fr.hollie.swing.Button;
+import fr.hollie.swing.Label;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,7 +14,7 @@ public class GuiLevel {
 
 
     //Method for create the level gui
-    public static void GuiLevel(){
+    public static void GuiLevel(String level){
         try {
             Main.frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("assets/images/BackgroundLevel.png")))));
         } catch (IOException e) {
@@ -30,6 +32,7 @@ public class GuiLevel {
                 true, "assets/images/ButtonLevel.png", 30, true);
         Button.Button(null,Main.frame,720, 197,146,146, null, null, "(5)",
                 true, "assets/images/ButtonLevel.png", 30, true);
+        Label.Label(null,Main.frame,250,200,500,100,20,level,false,false,null,true, Color.RED);
         Main.frame.setVisible(true);
     }
 }

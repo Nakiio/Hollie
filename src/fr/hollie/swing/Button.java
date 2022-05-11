@@ -37,7 +37,7 @@ public class Button {
             button.addActionListener((event) -> {
                 if(button.getText().equalsIgnoreCase("Play")){
                     Panel.ColseAllPanels();
-                    GuiLevel.GuiLevel();
+                    GuiLevel.GuiLevel("");
                 }else if(button.getText().equalsIgnoreCase("Settings")){
                     Panel.ColseAllPanels();
                     GuiSettings.GuiSettings();
@@ -55,21 +55,33 @@ public class Button {
                     if(Main.LevelPLayer >= 2){
                         Level2 level2 = new Level2(frame.getX(), frame.getY(), (int) frame.getSize().getWidth(), (int) frame.getSize().getHeight());
                         frame.setVisible(false);
+                    }else{
+                        Panel.ColseAllPanels();
+                        GuiLevel.GuiLevel("You don't have unlock this level!");
                     }
                 }else if(button.getText().equalsIgnoreCase("(3)")){
                     if(Main.LevelPLayer >= 3){
                         Level3 level3 = new Level3(frame.getX(), frame.getY(), (int) frame.getSize().getWidth(), (int) frame.getSize().getHeight());
                         frame.setVisible(false);
+                    }else{
+                        Panel.ColseAllPanels();
+                        GuiLevel.GuiLevel("You don't have unlock this level!");
                     }
                 }else if(button.getText().equalsIgnoreCase("(4)")){
                     if(Main.LevelPLayer >= 4){
                         Level4 level4 = new Level4(frame.getX(), frame.getY(), (int) frame.getSize().getWidth(), (int) frame.getSize().getHeight());
                         frame.setVisible(false);
+                    }else{
+                        Panel.ColseAllPanels();
+                        GuiLevel.GuiLevel("You don't have unlock this level!");
                     }
                 }else if(button.getText().equalsIgnoreCase("(5)")){
                     if(Main.LevelPLayer >= 5){
                         Level5 level5 = new Level5(frame.getX(), frame.getY(), (int) frame.getSize().getWidth(), (int) frame.getSize().getHeight());
                         frame.setVisible(false);
+                    }else{
+                        Panel.ColseAllPanels();
+                        GuiLevel.GuiLevel("You don't have unlock this level!");
                     }
                 }
             });

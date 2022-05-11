@@ -14,12 +14,14 @@ public class Label {
 
 
     //Method for create a Label
-    public static void Label(JPanel panel, int LocX, int LocY,int SizeX, int SizeY ,int Size, String string, boolean action, boolean border, Color Border){
+    public static void Label(JPanel panel,JFrame frame, int LocX, int LocY,int SizeX, int SizeY ,int Size, String string,
+                             boolean action, boolean border, Color Border, boolean PanelorFream, Color color){
         JLabel label = new JLabel();
         RemoveAllItems.AllItems.add(label);
         label.setLocation(LocX,LocY);
         label.setSize(SizeX,SizeY);
         label.setText(string);
+        label.setForeground(color);
         label.setFont(new Font("Verdana", Font.BOLD, Size));
         label.setVisible(true);
         if(border == true) {
@@ -36,7 +38,11 @@ public class Label {
                     public void mouseReleased(MouseEvent e) {label.setForeground(Color.GRAY);}
                 });
         }
-        panel.add(label);
+        if(PanelorFream == false) {
+            panel.add(label);
+        }else{
+            frame.add(label);
+        }
 
 
 
