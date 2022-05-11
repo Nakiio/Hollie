@@ -7,22 +7,20 @@ import java.io.File;
 import java.io.IOException;
 
 public class Background extends Rectangle{
-    Color color;
-    public Background(int x, int y, int width, int height, Color color){
+    String path;
+    public Background(int x, int y, int width, int height, String path){
         this.x=x;
         this.y=y;
         this.width=width;
         this.height=height;
-        this.color=color;
-
+        this.path=path;
     }
 
     public void draw(Graphics g){
-        g.setColor(this.color);
         JPanel b = null;
         try {
-            BufferedImage image = ImageIO.read(new File("assets/images/img.png"));
-            g.drawImage(image,0,0,1080,640,b);
+            BufferedImage image = ImageIO.read(new File(this.path));
+            g.drawImage(image,this.x,this.y,this.width,this.height,b);
         } catch (IOException e) {
             e.printStackTrace();
         }

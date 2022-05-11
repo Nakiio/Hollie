@@ -1,7 +1,7 @@
 package fr.hollie.Methodes.Guis;
 
 import fr.hollie.main.Main;
-import fr.hollie.swing.ButtonLevel;
+import fr.hollie.swing.Button;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class GuiSettings {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ButtonLevel.Button(Main.frame, 20, 500,210,60, null, null, "Return",
-                true, "assets/images/Button.png", 30);
+        Button.Button(null,Main.frame, 20, 500,210,60, null, null, "Return",
+                true, "assets/images/Button.png", 30, true);
     }
 }
