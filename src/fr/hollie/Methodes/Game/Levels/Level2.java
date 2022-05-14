@@ -21,11 +21,7 @@ public class Level2 extends JPanel implements ActionListener, KeyListener, Mouse
     public int x, y, speed;
     JFrame f = new JFrame();
     public Level2(int LocX, int LocY, int SizeX, int SizeY) {
-        Collision.collision = false;
-        Collision.GameOver = false;
-        Collision.GameWin = false;
-        Box.ArrayBoxs.clear();
-        Box.MapBoxs.clear();
+        Game.reset();
         f.setVisible(true);
         f.setSize(SizeX, SizeY);
         f.setLocation(LocX,LocY);
@@ -69,11 +65,8 @@ public class Level2 extends JPanel implements ActionListener, KeyListener, Mouse
             g.setColor(Color.RED);
             g.setFont(new Font("Mv Boli", Font.PLAIN, 75));
             g.drawString("Game Over !", 320, 200);
-        }
-
-        if(Collision.GameWin == true){
-            player = new Player(100000, 100000, 50, 50, false);
-            player.draw(g);
+        }else if(Collision.GameWin == true){
+            player.destroy();
             g.setColor(Color.GREEN);
             g.setFont(new Font("Mv Boli", Font.PLAIN, 75));
             g.drawString("Game Win!", 320, 200);
@@ -81,11 +74,7 @@ public class Level2 extends JPanel implements ActionListener, KeyListener, Mouse
             g.drawString("Go to the next level!", 340, 250);
             Main.LevelPLayer = 3;
         }
-
-
     }
-
-
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -123,28 +112,31 @@ public class Level2 extends JPanel implements ActionListener, KeyListener, Mouse
         if (Collision.collision ) {
             Rectangle2D.intersect(player.getBounds(), Box.MapBoxs.get(Collision.bc).getBounds(), intersection);
             if (intersection.width > intersection.height) { // si l'écart horizontal et plus grand que l'écart vertical, on arrête le déplacement vertical
+                player.x = player.x - intersection.width * (int) Math.signum(x);
                 player.y = player.y - intersection.height * (int) Math.signum(y);
-                y = 0;
+                x = y = 0;
             } else if (intersection.width == intersection.height) { // en cas d'égalité, en arrête les 2
                 player.x = player.x - intersection.width * (int) Math.signum(x);
                 player.y = player.y - intersection.height * (int) Math.signum(y);
                 x = y = 0;
             } else { // écart vertical supérieur à écart horizontal, arrêt déplacement horizontal
                 player.x = player.x - intersection.width * (int) Math.signum(x);
-                x = 0;
+                player.y = player.y - intersection.height * (int) Math.signum(y);
+                x = y = 0;
             }
 
         }
         repaint();
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if(LevelGui.contains(e.getPoint())){
+            player.destroy();
             f.setVisible(false);
             GuiLevel.GuiLevel(" ");
         }else if(Restart.contains(e.getPoint())){
+            player.destroy();
             Level2 level2 = new Level2(f.getX(), f.getY(), (int) f.getSize().getWidth(), (int) f.getSize().getHeight());
             repaint();
             f.dispose();

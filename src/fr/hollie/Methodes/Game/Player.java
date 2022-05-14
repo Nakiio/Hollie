@@ -27,6 +27,10 @@ public class Player extends Rectangle  {
         return y;
     }
 
+    public void destroy(){
+        this.move(10000,10000);
+    }
+
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

@@ -21,13 +21,7 @@ public class Level4 extends JPanel implements ActionListener, KeyListener, Mouse
     public int x, y, speed;
     JFrame f = new JFrame();
     public Level4(int LocX, int LocY, int SizeX, int SizeY) {
-        this.repaint();
-        Collision.collision = false;
-        Collision.GameOver = false;
-        Collision.GameWin = false;
-        Box.ArrayBoxs.clear();
-        Box.MapBoxs.clear();
-        repaint();
+        Game.reset();
         f.setVisible(true);
         f.setSize(SizeX, SizeY);
         f.setLocation(LocX,LocY);
@@ -74,8 +68,7 @@ public class Level4 extends JPanel implements ActionListener, KeyListener, Mouse
             g.setFont(new Font("Mv Boli", Font.PLAIN, 75));
             g.drawString("Game Over !", 320, 200);
         }else if(Collision.GameWin == true){
-            player = new Player(100000, 1000000, 50, 50, false);
-            player.draw(g);
+            player.destroy();
             g.setColor(Color.GREEN);
             g.setFont(new Font("Mv Boli", Font.PLAIN, 75));
             g.drawString("Game Win!", 320, 200);
@@ -125,15 +118,17 @@ public class Level4 extends JPanel implements ActionListener, KeyListener, Mouse
         if (Collision.collision ) {
             Rectangle2D.intersect(player.getBounds(), Box.MapBoxs.get(Collision.bc).getBounds(), intersection);
             if (intersection.width > intersection.height) { // si l'écart horizontal et plus grand que l'écart vertical, on arrête le déplacement vertical
+                player.x = player.x - intersection.width * (int) Math.signum(x);
                 player.y = player.y - intersection.height * (int) Math.signum(y);
-                y = 0;
+                x = y = 0;
             } else if (intersection.width == intersection.height) { // en cas d'égalité, en arrête les 2
                 player.x = player.x - intersection.width * (int) Math.signum(x);
                 player.y = player.y - intersection.height * (int) Math.signum(y);
                 x = y = 0;
             } else { // écart vertical supérieur à écart horizontal, arrêt déplacement horizontal
                 player.x = player.x - intersection.width * (int) Math.signum(x);
-                x = 0;
+                player.y = player.y - intersection.height * (int) Math.signum(y);
+                x = y = 0;
             }
 
         }
@@ -144,10 +139,12 @@ public class Level4 extends JPanel implements ActionListener, KeyListener, Mouse
     @Override
     public void mouseClicked(MouseEvent e) {
         if(LevelGui.contains(e.getPoint())){
+            player.destroy();
             f.setVisible(false);
             GuiLevel.GuiLevel(" ");
         }else if(Restart.contains(e.getPoint())){
-            Level4 level2 = new Level4(f.getX(), f.getY(), (int) f.getSize().getWidth(), (int) f.getSize().getHeight());
+            player.destroy();
+            Level4 level4 = new Level4(f.getX(), f.getY(), (int) f.getSize().getWidth(), (int) f.getSize().getHeight());
             repaint();
             f.dispose();
             this.setVisible(false);
